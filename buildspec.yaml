@@ -5,7 +5,7 @@ phases:
       - npm install
       - echo ${BUCKET}
       - ./node_modules/typescript/bin/tsc
-      - aws cloudformation package --template-file template.yaml --s3-bucket ${BUCKET} --output-template-file outputtemplate.yaml
+      - sam package --output-template-file packaged.yaml --s3-bucket ${BUCKET}
 artifacts:
   type: zip
   files:
