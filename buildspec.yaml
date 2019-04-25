@@ -5,9 +5,10 @@ phases:
       - npm install
       - echo ${BUCKET}
       - ./node_modules/typescript/bin/tsc
-      - sam package --output-template-file packaged.yaml --s3-bucket ${BUCKET}
+      - aws cloudformation package --template-file template.yaml --s3-bucket ${BUCKET} --output-template-file outputtemplate.yaml
 artifacts:
   type: zip
   files:
     - template.yaml
     - outputtemplate.yaml
+  name: lambdafunctionjd.zip
