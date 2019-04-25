@@ -1,4 +1,4 @@
-export const handler = async (event: any = {}): Promise<any> => {
+export const handler = async (event: any = {}, context: any = {}): Promise<any> => {
     var body = {Message : "Hello Workshop!"} 
     var response = {
         "statusCode": 200,
