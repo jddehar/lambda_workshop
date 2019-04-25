@@ -7,13 +7,19 @@
   "author": "SAM CLI",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.18.0",
+    "typescript": "^3.4.5"
   },
   "scripts": {
-    "test": "mocha tests/unit/"
+    "test": "mocha -r ts-node/register lambda_function/**/*.spec.ts"
   },
   "devDependencies": {
-    "chai": "^4.1.2",
-    "mocha": "^5.1.1"
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.6",
+    "chai": "^4.2.0",
+    "install": "^0.12.2",
+    "mocha": "^5.2.0",
+    "npm": "^6.9.0",
+    "ts-node": "^8.1.0"
   }
 }
