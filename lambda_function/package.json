@@ -1,0 +1,19 @@
+{
+  "name": "lambda_workshop",
+  "version": "1.0.0",
+  "description": "Template code for the Lambda Workshop",
+  "main": "app.js",
+  "repository": "https://github.com/jddehar/lambda_workshop.git",
+  "author": "SAM CLI",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0"
+  },
+  "scripts": {
+    "test": "mocha tests/unit/"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.1.1"
+  }
+}
