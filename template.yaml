@@ -24,8 +24,8 @@ Resources:
         Workshop:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /function
-            Method: get
+            Path: /upload
+            Method: post
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
@@ -33,7 +33,7 @@ Outputs:
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
   LambdaWorkshopApi:
     Description: "API Gateway endpoint URL for Prod stage for your function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/function/"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/upload/"
   LambdaWorkshop:
     Description: "Your Lambda Function ARN"
     Value: !GetAtt LambdaWorkshop.Arn

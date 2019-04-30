@@ -7,6 +7,8 @@
   "author": "SAM CLI",
   "license": "MIT",
   "dependencies": {
+    "@types/node": "^11.13.8",
+    "aws-sdk": "^2.445.0",
     "axios": "^0.18.0",
     "typescript": "^3.4.5"
   },
@@ -23,6 +25,8 @@
     "ts-node": "^8.1.0"
   },
   "bundleDependencies": [
-    "tsc"
+    "tsc",
+    "aws-sdk",
+    "@types/node"
   ]
 }
