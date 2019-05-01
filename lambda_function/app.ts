@@ -15,8 +15,14 @@ export const handler = async (event: any = {}, context: any = {}): Promise<any> 
     };
 
     s3.upload(s3Params, function(err: Error, data: any) {
-        console.log(err);
-        if(err) { return console.log(err) }
+        if(err) {
+             console.log(err)
+             return {
+                statusCode: 500,
+                isBase64Encoded: false,
+                body: JSON.stringify({message: err})
+            }
+        }
         console.log(`Uploaded to ${data.Location}`);
         var body = { imageURL: data.Location}
         return {
@@ -25,4 +31,5 @@ export const handler = async (event: any = {}, context: any = {}): Promise<any> 
             body: JSON.stringify(body)
         }
     })
+
 }

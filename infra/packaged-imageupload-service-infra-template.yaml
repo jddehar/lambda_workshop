@@ -1,0 +1,37 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Template describing the service infrastructure
+Parameters:
+  CodeCommitRepoName:
+    Type: String
+Resources:
+  IamRoles:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/imageupload-service-infra-jdehart/1970461bdedfe7af8afb5fb0b23512a7.template
+  CodeCommitRepo:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/imageupload-service-infra-jdehart/e82752442ca85f927d491cde98ba0ab4.template
+      Parameters:
+        RepoName:
+          Ref: CodeCommitRepoName
+  CodePipeline:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://s3.amazonaws.com/imageupload-service-infra-jdehart/32e045f3d4e5a8d2102e0f3b003534d8.template
+      Parameters:
+        ArtifactBucketName:
+          Fn::GetAtt:
+          - IamRoles
+          - Outputs.ArtifactBucketName
+        CodePipelineServiceRoleArn:
+          Fn::GetAtt:
+          - IamRoles
+          - Outputs.CodePipelineServiceRoleArn
+        CodeBuildServiceRoleArn:
+          Fn::GetAtt:
+          - IamRoles
+          - Outputs.CodeBuildServiceRoleArn
+        CodeCommitRepositoryName:
+          Ref: CodeCommitRepoName
+        CodeCommitBranchName: master
