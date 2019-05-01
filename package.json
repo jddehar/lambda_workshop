@@ -13,6 +13,7 @@
     "typescript": "^3.4.5"
   },
   "scripts": {
+    "build": "tsc",
     "test": "mocha -r ts-node/register lambda_function/**/*.spec.ts"
   },
   "devDependencies": {
