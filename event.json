@@ -1,5 +1,5 @@
 {
-  "body": "{\"message\": \"hello world\"}",
+  "body": "{\"filename\" : \"filename.txt\", \"encoded_image\" : \"ewogICAgImZpbGVuYW1lIiA6ICJmaWxlbmFtZS50eHQiLAogICAgImVuY29kZWRfaW1hZ2UiIDogIiIKfQ==\"}",
   "resource": "/{proxy+}",
   "path": "/path/to/resource",
   "httpMethod": "POST",

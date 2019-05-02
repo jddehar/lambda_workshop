@@ -1,35 +1,38 @@
 
 import * as AWS from 'aws-sdk';
-import { S3 } from 'aws-sdk';
 
+const s3 = new AWS.S3();
 
 export const handler = async (event: any = {}, context: any = {}): Promise<any> => {
-    var s3 = new AWS.S3();
+    var response = {
+        'statusCode': 200,
+        'body': " "
+    }
     var bucketName = String(process.env.BUCKETNAME); 
-    var imageBuffer = new Buffer(event.encoded_image, 'base64');
+    var data
+    var imageBuffer
 
-    const s3Params = {
-        Bucket: bucketName,
-        Key: event.filename,
-        Body: imageBuffer    
-    };
+    //Verify the passed in data
+    try {
+        data = JSON.parse(event.body);
+        imageBuffer = new Buffer(data.encoded_image, 'base64');
+    }catch(err) {
+        response.statusCode = 400
+        response.body = `{"message" : ${err}}`
+        return response;
+    }
 
-    s3.upload(s3Params, function(err: Error, data: any) {
-        if(err) {
-             console.log(err)
-             return {
-                statusCode: 500,
-                isBase64Encoded: false,
-                body: JSON.stringify({message: err})
-            }
-        }
-        console.log(`Uploaded to ${data.Location}`);
-        var body = { imageURL: data.Location}
-        return {
-            statusCode: 200,
-            isBase64Encoded: false,
-            body: JSON.stringify(body)
-        }
-    })
-
+    //Send our encoded file to S3
+    try {
+        const s3Params = {
+            Bucket: bucketName,
+            Key: data.filename,
+            Body: imageBuffer
+        };
+        var result = await s3.upload(s3Params).promise();
+        response.body = `{"url" : ${result.Location}}`
+        return response;
+    } catch (err) {
+        return err;
+    }
 }
